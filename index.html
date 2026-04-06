@@ -1,237 +1,748 @@
-<?php include_once 'analyze.php'; ?>
-<?php
-// news.json を読み込む
-$newsJsonPath = __DIR__ . '/news.json';
-$news = [];
-if (file_exists($newsJsonPath)) {
-    $raw = file_get_contents($newsJsonPath);
-    $decoded = json_decode($raw ?: '[]', true);
-    if (is_array($decoded)) {
-        $news = $decoded;
-    }
-}
-
-// エスケープ用関数
-if (!function_exists('h')) {
-    function h(string $s): string {
-        return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
-    }
-}
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>こゆるり神社 | 公式ページ</title>
-<meta name="description" content="こゆるり神社（神奈川県三浦市三崎）小さな神社の大きなご利益。本瑞寺のお膝元にある「茶吉尼天尊」は、小浜景隆の邸宅跡と伝えられる場所にあります。
-そのお屋敷へと続く通用道として使われていたとされる一角にあります。">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>こゆるり神社 | 小さな神社の大きなご利益</title>
+  <meta name="description" content="神奈川県三浦市三崎に鎮座するこゆるり神社の公式サイトです。ご祈祷・授与品・年中行事など、小さな神社の大きなご利益をご案内します。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://koyururi-jinja.com/">
-<meta property="og:title" content="こゆるり神社 | 小さな神社の大きなご利益">
-<meta property="og:description" content="こゆるり神社（神奈川県三浦市三崎）小さな神社の大きなご利益。本瑞寺のお膝元にある「茶吉尼天尊」は、小浜景隆の邸宅跡と伝えられる場所にあります。">
-<meta property="og:image" content="https://koyururi-jinja.com/images/ogp.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="こゆるり神社">
-<meta property="og:locale" content="ja_JP">
+    :root {
+      --red:        #9b1a1a;
+      --red-hover:  #b52020;
+      --gold:       #c9a84c;
+      --cream:      #fdf8f3;
+      --cream-dark: #f5ede0;
+      --text:       #1e1209;
+      --text-mid:   #4a3520;
+      --text-light: #7a6040;
+      --border:     #d4b896;
+    }
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="こゆるり神社 | 小さな神社の大きなご利益">
-<meta name="twitter:description" content="こゆるり神社（神奈川県三浦市三崎）小さな神社の大きなご利益。本瑞寺のお膝元にある「茶吉尼天尊」は、小浜景隆の邸宅跡と伝えられる場所にあります。">
-<meta name="twitter:image" content="https://koyururi-jinja.com/images/ogp.jpg">
+    html { scroll-behavior: smooth; }
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    body {
+      font-family: 'Noto Serif JP', serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-<link rel="canonical" href="https://koyururi-jinja.com/">
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(253,248,243,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--border);
+      box-shadow: 0 2px 16px rgba(155,26,26,0.08);
+      transition: box-shadow 0.3s;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  >
-<link rel="stylesheet" href="./style.css">
-<style>
-  /* 既存の .news-item (flex) を解除し、画像を下に配置 */
-  .news-item {
-    display: block !important;
-    padding: 24px !important;
-  }
-  
-  .news-content {
-    width: 100% !important;
-  }
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .news-body {
-    display: block !important;
-    -webkit-line-clamp: unset !important;
-    max-height: none !important;
-    white-space: pre-wrap !important;
-    word-break: break-all !important;
-  }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
 
-  /* 画像ギャラリー：3分割 + 余白(計4%) */
-  .news-image-gallery {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 2% !important;
-    margin-top: 16px !important;
-  }
-  
-  .news-image-gallery img {
-    width: 32% !important;
-    height: auto !important;
-    object-fit: cover !important;
-    border-radius: 8px !important;
-    border: 1px solid var(--color-border) !important;
-    background: var(--color-white) !important;
-  }
+    .logo img {
+      height: 46px;
+      width: auto;
+    }
 
-  /* 既存のサムネイル枠を非表示 */
-  .news-thumb {
-    display: none !important;
-  }
-</style>
+    .logo-torii {
+      display: none;
+    }
+
+    .logo img[src="./images/logo.png"] {
+      /* 読み込み失敗時はSVGを表示 */
+    }
+
+    .logo-text-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-name {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+
+    .logo-romaji {
+      font-size: 0.62rem;
+      color: var(--text-light);
+      letter-spacing: 0.14em;
+      margin-top: 4px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 4px 12px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    nav a + a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: var(--border);
+    }
+
+    nav a:hover, nav a.active { color: var(--red); }
+    nav a.active { font-weight: 600; }
+
+    /* モバイル */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-mid);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(253,248,243,0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+
+    .mobile-menu a:hover { color: var(--red); }
+
+    .mobile-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-size: 2rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-mid);
+      line-height: 1;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      overflow: hidden;
+      background: #0d0404;
+    }
+
+    .hero video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,2,2,0.75) 0%,
+        rgba(10,2,2,0.48) 55%,
+        rgba(10,2,2,0.28) 100%
+      );
+    }
+
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 72px;
+      animation: heroFadeUp 1s ease both;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.06em;
+      text-shadow: 0 2px 32px rgba(0,0,0,0.9);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 0.2em;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.9);
+      margin-bottom: 36px;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Noto Serif JP', serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      padding: 14px 40px;
+      text-decoration: none;
+      transition: background 0.25s, transform 0.2s;
+      width: fit-content;
+      box-shadow: 0 4px 24px rgba(155,26,26,0.5);
+    }
+
+    .hero-btn:hover {
+      background: var(--red-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      padding: 72px 24px 64px;
+      text-align: center;
+      background: var(--cream);
+    }
+
+    .section-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+    }
+
+    .about-box {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 40px 52px;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    /* 四隅の金装飾 */
+    .about-box .c { position: absolute; width: 18px; height: 18px; border-color: var(--gold); border-style: solid; }
+    .about-box .c-tl { top: -1px; left: -1px; border-width: 3px 0 0 3px; }
+    .about-box .c-tr { top: -1px; right: -1px; border-width: 3px 3px 0 0; }
+    .about-box .c-bl { bottom: -1px; left: -1px; border-width: 0 0 3px 3px; }
+    .about-box .c-br { bottom: -1px; right: -1px; border-width: 0 3px 3px 0; }
+
+    .gold-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .gold-line::before,
+    .gold-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+
+    .gold-line span {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: block;
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      line-height: 2.1;
+      color: var(--text-mid);
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== 3COLUMN CARDS ===== */
+    .cards-section {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0;
+    }
+
+    .cards-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: none;
+      padding: 48px 32px 44px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.25s;
+      position: relative;
+    }
+
+    .card:not(:last-child) { border-right: none; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--red);
+    }
+
+    .card:hover { box-shadow: 0 8px 40px rgba(155,26,26,0.12); z-index: 1; }
+
+    .card-icon {
+      width: 54px;
+      height: 54px;
+      margin-bottom: 16px;
+    }
+
+    .card-title-en {
+      display: block;
+      font-size: 0.62rem;
+      color: var(--text-light);
+      letter-spacing: 0.22em;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      line-height: 1.95;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .card-btn {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      padding: 11px 36px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .card-btn:hover { background: var(--red-hover); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #1a0808;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      min-height: 240px;
+    }
+
+    .footer-info {
+      padding: 48px 40px 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .footer-logo img {
+      height: 40px;
+      width: auto;
+      filter: brightness(0) invert(1) opacity(0.85);
+    }
+
+    .footer-logo-name {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.2rem;
+      color: #fff;
+      letter-spacing: 0.06em;
+      display: block;
+    }
+
+    .footer-logo-romaji {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.45);
+      margin-top: 3px;
+      display: block;
+    }
+
+    .footer-address {
+      font-size: 0.8rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 20px;
+    }
+
+    .footer-address a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+    }
+
+    .footer-address a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .footer-links a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.42);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+    .footer-copyright {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-map {
+      overflow: hidden;
+    }
+
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      border: none;
+      display: block;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 920px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content { padding: 0 36px; }
+      .hero-title { font-size: 2.4rem; }
+
+      .cards-inner { grid-template-columns: 1fr; }
+      .card:not(:last-child) { border-right: 1px solid var(--border); border-bottom: none; }
+
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-map { height: 220px; }
+      .footer-map iframe { min-height: 220px; }
+
+      .about-box { padding: 28px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { height: 400px; }
+      .hero-title { font-size: 2rem; }
+      .hero-sub { font-size: 0.88rem; }
+      .hero-content { padding: 0 24px; }
+      .section-title { font-size: 1.4rem; }
+    }
+  </style>
 </head>
-
 <body>
-<header class="site-header">
-  <div class="wrap">
-    <div class="header-inner"> <a href="index.html" class="brand" aria-label="こゆるり神社">
-      <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
-      <h1 class="brand-title">こゆるり神社</h1>
+
+  <!-- ===== HEADER ===== -->
+  <header id="site-header">
+    <div class="header-inner">
+
+      <a href="./index.html" class="logo">
+        <img src="./images/logo.png" alt="こゆるり神社ロゴ"
+          onerror="this.style.display='none'">
+        <div class="logo-text-wrap">
+          <span class="logo-name">こゆるり神社</span>
+          <span class="logo-romaji">Koyururi Shrine</span>
+        </div>
       </a>
-      <p class="header-catch">小さな神社の大きなご利益</p>
-      <div class="header-actions"> <a class="icon-btn" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ"> <img src="./images/shop.png" alt=""> </a>
-        <button
-            class="icon-btn menu-btn"
-            type="button"
-            aria-label="メニューを開く"
-            aria-controls="spNav"
-            aria-expanded="false"
-            data-open-src="./images/open.png"
-            data-close-src="./images/close.png"
-          > <img src="./images/open.png" alt=""> </button>
-      </div>
+
+      <nav>
+        <a href="./index.html" class="active">ホーム</a>
+        <a href="./yurai.html">ご由緒</a>
+        <a href="./gosaijin.html">御祭神</a>
+        <a href="./gokitou.html">ご祈祷</a>
+        <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+        <a href="./access.html">アクセス</a>
+        <a href="./contact.html">お問い合わせ</a>
+      </nav>
+
+      <button class="hamburger" id="menuBtn" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
+    <button class="mobile-close" id="menuClose" aria-label="閉じる">✕</button>
+    <a href="./index.html">ホーム</a>
+    <a href="./yurai.html">ご由緒</a>
+    <a href="./gosaijin.html">御祭神</a>
+    <a href="./gokitou.html">ご祈祷</a>
+    <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+    <a href="./access.html">アクセス</a>
+    <a href="./contact.html">お問い合わせ</a>
   </div>
-</header>
-<div class="wrap">
-  <section class="fv" aria-label="ファーストビュー">
-    <div class="fv-media">
-      <video class="fv-video" src="./images/fv.mp4" autoplay muted  playsinline></video>
-      </div>
-    <nav class="pills" aria-label="ページ内メニュー"> <a class="pill" href="yurai.html">由来</a> <a class="pill" href="gosaijin.html">御祭神</a> <a class="pill" href="gokitou.html">ご祈祷</a> <a class="pill" href="onayami.html">お悩み相談</a> </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <video autoplay muted loop playsinline poster="./images/hero-poster.jpg">
+      <source src="./images/fv.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">こゆるり神社</h1>
+      <p class="hero-sub">静寂と祈りの聖地</p>
+      <a href="./gokitou.html" class="hero-btn">ご参拝のご案内</a>
+    </div>
   </section>
-  <main class="prose">
-    <section class="lead">
-      <p>本瑞寺のお膝元にある「茶吉尼天尊」は、小浜景隆の邸宅跡と伝えられる場所にあります。<br>
-        そのお屋敷へと続く通用道として使われていたとされる一角にあります</p>
-    </section>
-    <section id="yurai" class="section section--ref">
-      <h2 class="ref-title">小さな神社の大きな御利益</h2>
-      <div class="ref-divider" aria-hidden="true"></div>
-      <p class="ref-text"> 現在の本堂等の敷地は、かつて小浜藩稀の御屋敷であったと伝えられています。そのお屋敷への出入り、通用門の一角に、小さな社「茶吉尼天尊」は佇んでいました。</p>
-      <p class="ref-text">本堂等がこの地に移って以降も、守りとしてこの神社がいかに人々の信仰を集め、今日まで大切に護られて来たかを物語っています。</p>
-      <p class="ref-text">2025年4月12日、茨城県東海村の「村松虚空蔵尊」を訪れ、住職夫人にお話を伺ったところ、以下のことが判明しました。</p>
-      <p class="ref-text">大正11年（1922年）5月、小田原の川崎太七氏が「茶吉尼天尊」の建設を出願し、同年11月に落成したとのことです。</p>
-      <p class="ref-text">当時、東京には「東京講社」という信仰団体が存在しており、以下の3つのいずれかの団体が東海村の「村松虚空蔵尊」に「茶吉尼天尊」を奉納したとされています。</p>
-      <div class="ref-box" aria-label="主な構成団体">
-        <h3>主な構成団体</h3>
-        <ul class="ref-list">
-          <li>東京大星講</li>
-          <li>招福講（墨田区中心）</li>
-          <li>東牛会（丑年生まれの集まり）</li>
-        </ul>
-      </div>
-      <p class="ref-note">その奉納された「茶吉尼天尊」が、三崎に分霊されたようです。</p>
-      <p class="ref-text"> 三崎には「大満講」という信仰団体があり、信仰熱心な方々が団体でバスに乗って「村松虚空蔵尊の茶吉尼天尊」へ参拝していたと伝えられています。 </p>
-      <p class="ref-text"> 「村松虚空蔵尊」に寄進された釣り鐘も、大満講によるものであると記録が残っています。 </p>
-      <div class="spacer-l"></div>
-    </section>
 
-    <section id="news" class="section section--ref">
-      <h2 class="ref-title">お知らせ</h2>
-      <div class="ref-divider" aria-hidden="true"></div>
-      <div id="newsList" class="news-list">
-        <?php if (empty($news)): ?>
-          <p class="news-empty">現在お知らせはありません。</p>
-        <?php else: ?>
-          <?php 
-          $displayItems = array_slice(array_reverse($news), 0, 3);
-          foreach ($displayItems as $item): 
-          ?><article class="news-item"><div class="news-content"><div class="news-date"><?= h(str_replace('T', ' ', $item['datetime'] ?? $item['date'] ?? '')) ?></div><h3 class="news-title"><?= h($item['title'] ?? '') ?></h3><div class="news-body"><?= $item['body'] ?? '' ?></div><?php if (!empty($item['images']) && is_array($item['images'])): ?><div class="news-image-gallery"><?php foreach ($item['images'] as $img): ?><img src="<?= h((string)$img) ?>" alt="" loading="lazy"><?php endforeach; ?></div><?php endif; ?></div></article><?php endforeach; ?>
-        <?php endif; ?>
-      </div>
-      <div class="spacer-l"></div>
-    </section>
+  <!-- ===== ABOUT ===== -->
+  <section class="about">
+    <h2 class="section-title">当神社について</h2>
+    <div class="about-box">
+      <span class="c c-tl"></span>
+      <span class="c c-tr"></span>
+      <span class="c c-bl"></span>
+      <span class="c c-br"></span>
+      <div class="gold-line"><span></span></div>
+      <p class="about-text">
+        本瑞寺のお膝元にある「茶吉尼天尊」が前身。<br>
+        宮司が神主資格を自ら取得し、管理を引き継いだ個人運営の神社です。<br>
+        大正11年（1922年）に茨城県東海村「村松虚空蔵尊」より<br>
+        三崎に分霊され、地域の人々の信仰を集めてまいりました。<br>
+        <br>
+        小さな神社ながら、大きなご利益で皆様をお迎えします。
+      </p>
+      <div class="gold-line"><span></span></div>
+    </div>
+  </section>
 
-<!--
-    <section id="gokitou" class="section section--ref">
-      <h2 class="ref-title">ご祈祷</h2>
-      <div class="ref-divider" aria-hidden="true"></div>
-      <p class="ref-text-center"> ご祈祷についてはこちらのページに詳しく掲載しております。 </p>
-      <div class="bnr-section">
-        <div class="bnr-frame">
-          <div class="bnr-placeholder"> <a href="gokitou.html"><img src="./images/gokitou.png" alt="ご祈祷"></a> </div>
-        </div>
+  <!-- ===== 3COLUMN CARDS ===== -->
+  <section class="cards-section">
+    <div class="cards-inner">
+
+      <!-- ご祈祷 -->
+      <div class="card">
+        <!-- 鳥居アイコン -->
+        <svg class="card-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="17" width="46" height="5" rx="2.5" fill="#9b1a1a"/>
+          <rect x="11" y="9"  width="32" height="4"  rx="2"   fill="#9b1a1a"/>
+          <rect x="12" y="22" width="5"  height="28" rx="2.5" fill="#9b1a1a"/>
+          <rect x="37" y="22" width="5"  height="28" rx="2.5" fill="#9b1a1a"/>
+          <line x1="16" y1="28" x2="38" y2="28" stroke="#c9a84c" stroke-width="1.5"/>
+        </svg>
+        <span class="card-title-en">PRAYER</span>
+        <h3 class="card-title">ご祈祷</h3>
+        <p class="card-desc">
+          こゆるり神社にて、ご祈祷を承っております。開運招福・厄除け・良縁成就・学業成就など、皆さまのご要望に合わせてご案内します。
+        </p>
+        <a href="./gokitou.html" class="card-btn">詳しく見る</a>
       </div>
-      <div class="spacer-l"></div>
-    </section>
--->
-    <section id="goods" class="section section--ref">
-      <h2 class="ref-title">授与品</h2>
-      <div class="ref-divider" aria-hidden="true"></div>
-      <p class="ref-text-center"> 授与品については特設ページに掲載しております。 </p>
-      <div class="bnr-section">
-        <div class="bnr-frame">
-          <div class="bnr-placeholder"> <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener"><img src="./images/jyuyohin.png" alt="授与品"></a> </div>
-        </div>
+
+      <!-- 授与品 -->
+      <div class="card">
+        <!-- お守りアイコン -->
+        <svg class="card-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="14" y="10" width="26" height="32" rx="4" stroke="#9b1a1a" stroke-width="2.5" fill="none"/>
+          <path d="M22 10 V6 Q27 3 32 6 V10" stroke="#9b1a1a" stroke-width="2.5" fill="none"/>
+          <line x1="19" y1="22" x2="35" y2="22" stroke="#c9a84c" stroke-width="2"/>
+          <line x1="19" y1="28" x2="35" y2="28" stroke="#c9a84c" stroke-width="2"/>
+          <circle cx="27" cy="36" r="2.5" fill="#9b1a1a"/>
+          <line x1="27" y1="42" x2="27" y2="48" stroke="#9b1a1a" stroke-width="2" stroke-linecap="round"/>
+          <line x1="23" y1="48" x2="31" y2="48" stroke="#9b1a1a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="card-title-en">GOODS</span>
+        <h3 class="card-title">授与品</h3>
+        <p class="card-desc">
+          おまもりをお求めのかたへ。授与品に関しましては、特設ショップにてご案内しております。ご縁の品をどうぞお求めください。
+        </p>
+        <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" class="card-btn">詳しく見る</a>
       </div>
-      <div class="spacer-l"></div>
-    </section>
-  </main>
-  <footer class="prose">
-    <address>こゆるり神社<br>
-      〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
-      お問い合わせ：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a></address>
-    <div class="footer-links" aria-label="フッターリンク"> <a href="tos.html" aria-label="利用規約">利用規約</a> <span class="sep" aria-hidden="true">|</span> <a href="privacy.html" aria-label="プライバシー・ポリシー">プライバシー・ポリシー</a> <span class="sep" aria-hidden="true">|</span> <a href="required-information.html" aria-label="特定商取引法に基づく表示">特定商取引法に基づく表示</a> </div>
-    <div style="margin-top:8px;">&copy; 2026 こゆるり神社 All Rights Reserved.</div>
+
+      <!-- 年中行事 -->
+      <div class="card">
+        <!-- カレンダーアイコン -->
+        <svg class="card-icon" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6"  y="13" width="42" height="35" rx="3" stroke="#9b1a1a" stroke-width="2.5" fill="none"/>
+          <line x1="6"  y1="23" x2="48" y2="23" stroke="#9b1a1a" stroke-width="2"/>
+          <line x1="17" y1="7"  x2="17" y2="19" stroke="#9b1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="37" y1="7"  x2="37" y2="19" stroke="#9b1a1a" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="13" y="29" width="7" height="7" rx="1.5" fill="#c9a84c"/>
+          <rect x="24" y="29" width="7" height="7" rx="1.5" fill="#9b1a1a" opacity="0.35"/>
+          <rect x="35" y="29" width="7" height="7" rx="1.5" fill="#9b1a1a" opacity="0.35"/>
+          <rect x="13" y="39" width="7" height="7" rx="1.5" fill="#9b1a1a" opacity="0.35"/>
+          <rect x="24" y="39" width="7" height="7" rx="1.5" fill="#9b1a1a" opacity="0.35"/>
+        </svg>
+        <span class="card-title-en">EVENTS</span>
+        <h3 class="card-title">年中行事</h3>
+        <p class="card-desc">
+          年中行事・祭典の情報をご案内しております。毎年ご参拝いただく皆さまと、節目ごとの感謝と祈りを捧げてまいります。
+        </p>
+        <a href="./events.html" class="card-btn">詳しく見る</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-info">
+        <div>
+          <div class="footer-logo">
+            <img src="./images/logo.png" alt="こゆるり神社"
+              onerror="this.style.display='none'">
+            <div>
+              <span class="footer-logo-name">こゆるり神社</span>
+              <span class="footer-logo-romaji">Koyururi Shrine</span>
+            </div>
+          </div>
+
+          <div class="footer-address">
+            〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
+            TEL：お問い合わせフォームよりご連絡ください<br>
+            E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
+          </div>
+
+          <div class="footer-links">
+            <a href="./tos.html">利用規約</a>
+            <a href="./privacy.html">プライバシーポリシー</a>
+            <a href="./required-information.html">特定商取引法に基づく表示</a>
+          </div>
+        </div>
+
+        <p class="footer-copyright">© 2026 こゆるり神社 All Rights Reserved.</p>
+      </div>
+
+      <!-- Googleマップ（三浦市三崎） -->
+      <div class="footer-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.0!2d139.619!3d35.154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019276ced5c2b81%3A0x7b9fee3c53a9bb49!2z44GT44f3441v44KoIOelnuexsQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="こゆるり神社 アクセスマップ">
+        </iframe>
+      </div>
+
+    </div>
   </footer>
-</div>
-<aside id="spNav" class="sp-nav" aria-hidden="true">
-  <div class="sp-panel" role="dialog" aria-modal="true" aria-label="メニュー">
-    <div class="sp-head">
-      <p class="sp-title">小さな神社の大きなご利益</p>
-      <button class="icon-btn sp-close" type="button" aria-label="メニューを閉じる"> <img src="./images/close.png" alt=""> </button>
-    </div>
-    <div class="brand" aria-label="こゆるり神社">
-      <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
-      <div class="brand-title">こゆるり神社</div>
-    </div>
-    <ul class="sp-menu">
-      <li><a href="index.html">小さな神社の大きなご利益</a></li>
-      <li><a href="#yurai">由来</a></li>
-      <li><a href="gosaijin.html">御祭神</a></li>
-      <li><a href="gokitou.html">ご祈祷</a></li>
-      <li><a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a></li>
-      <li><a href="contact.html">お問い合わせ</a></li>
-    </ul>
-  </div>
-</aside>
 
-<nav class="fixed-cta fixed-cta--pc" aria-label="固定ボタン（PC）"> <a class="cta-contact" href="contact.html" aria-label="お問い合わせへ">お問い合わせ</a> <a class="cta-goods" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ">授与品</a> </nav>
+  <script>
+    // モバイルメニュー
+    const menuBtn    = document.getElementById('menuBtn');
+    const menuClose  = document.getElementById('menuClose');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-<nav class="fixed-cta fixed-cta--sp" aria-label="固定ボタン（SP）">
-  <div class="cta-row"> <a class="cta-contact" href="contact.html" aria-label="お問い合わせへ">お問い合わせ</a> <a class="cta-goods" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ">授与品</a> </div>
-</nav>
+    menuBtn.addEventListener('click',  () => mobileMenu.classList.add('open'));
+    menuClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileMenu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'))
+    );
 
-<button id="backToTop" class="back-to-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+    // スクロールでヘッダーシャドウ
+    window.addEventListener('scroll', () => {
+      document.getElementById('site-header').style.boxShadow =
+        window.scrollY > 20
+          ? '0 4px 24px rgba(155,26,26,0.18)'
+          : '0 2px 16px rgba(155,26,26,0.08)';
+    });
+  </script>
 
-<script src="./script.js" defer></script>
 </body>
 </html>
