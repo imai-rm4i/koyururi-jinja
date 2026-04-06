@@ -2,19 +2,19 @@
   Koyururi Shrine (Mobile-first)
   Author: TB
 ====================== */ :root {
-  --color-bg: #FAF2E7;
-  --color-bg-warm: #F5EDE3;
-  --color-bg-section: #FDF9F4;
-  --color-text: #5C403C;
-  --color-text-light: #8B7868;
-  --color-accent: #B8A285;
-  --color-accent-dark: #A68B5B;
-  --color-white: #FFFFFF;
-  --color-border: #E5D8D3;
-  --font-serif: "Noto Serif JP", serif;
-  --font-round: "Zen Maru Gothic", sans-serif;
-  --radius: 14px;
-  --max: 720px;
+    --color-bg: #ffffff;
+    --color-bg-warm: #F5EDE3;
+    --color-bg-section: #FDF9F4;
+    --color-text: #5C403C;
+    --color-text-light: #8B7868;
+    --color-accent: #B8A285;
+    --color-accent-dark: #A68B5B;
+    --color-white: #FFFFFF;
+    --color-border: #E5D8D3;
+    --font-serif: "Noto Serif JP", serif;
+    --font-round: "Zen Maru Gothic", sans-serif;
+    --radius: 14px;
+    --max: 720px;
 }
 *, *::before, *::after {
   box-sizing: border-box;
@@ -66,7 +66,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 3000;
-  background: rgba(250, 242, 231, 0.92);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--color-border);
 }
@@ -121,7 +121,7 @@ a:hover {
   text-align: center;
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 24px;
   letter-spacing: 0.12em;
   color: var(--color-text-light);
   line-height: 1.4;
