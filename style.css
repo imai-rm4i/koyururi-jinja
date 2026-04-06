@@ -12,7 +12,8 @@
     --color-white: #FFFFFF;
     --color-border: #E5D8D3;
     --font-serif: "Noto Serif JP", serif;
-    --font-round: "Zen Maru Gothic", sans-serif;
+    /*--font-round: "Zen Maru Gothic", sans-serif;*/
+    --font-round: "Noto Serif JP", serif;
     --radius: 14px;
     --max: 720px;
 }
