@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>お悩み相談 | こゆるり神社</title>
+<meta name="description" content="こゆるり神社のお悩み相談">
+
+<!-- Fonts（参考ページの雰囲気：Noto Serif JP + Zen Maru Gothic） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner"> <a href="index.html" class="brand" aria-label="こゆるり神社">
+      <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
+      <div class="brand-title">こゆるり神社</div>
+      </a>
+      <p class="header-catch">小さな神社の大きなご利益</p>
+      <div class="header-actions"> <a class="icon-btn" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ"> <img src="./images/shop.png" alt=""> </a>
+        <button
+            class="icon-btn menu-btn"
+            type="button"
+            aria-label="メニューを開く"
+            aria-controls="spNav"
+            aria-expanded="false"
+            data-open-src="./images/open.png"
+            data-close-src="./images/close.png"
+          > <img src="./images/open.png" alt=""> </button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+<section class="fv" aria-label="ファーストビュー">
+<div class="fv-hero">
+  <!-- トップFV：動画表示（画像に切り替える場合は以下をコメントアウトし、下の画像コードを有効化） -->
+  <video class="fv-video" src="./images/hero.mp4" autoplay muted playsinline></video>
+  <!-- トップFV：画像表示（動画に切り替える場合は以下をコメントアウトし、上の動画コードを有効化） -->
+  <!--
+  <img class="fv-image" src="./images/hero.png" alt="こゆるり神社 小さな神社の大きなご利益">
+  -->
+</div>
+<nav class="pills" aria-label="ページ内メニュー"> <a class="pill" href="yurai.html">由来</a> <a class="pill" href="gosaijin.html">御祭神</a> <a class="pill" href="gokitou.html">ご祈祷</a> <a class="pill" href="onayami.html">お悩み相談</a> </nav>
+<main class="prose">
+  <section class="lead">
+    <p>本瑞寺のお膝元にある「茶吉尼天尊」は、小浜景隆の邸宅跡と伝えられる場所にあります。<br>
+      そのお屋敷へと続く通用道として使われていたとされる一角にあります</p>
+  </section>
+  <section id="intro" class="section section--ref">
+    <h1 class="ref-title">こゆるり 神主による、心の紐解き</h1>
+    <div class="ref-divider" aria-hidden="true"></div>
+    <div class="ref-box" aria-label="お悩み相談">
+      <h2>「あなたのお悩み、神様の視点から眺めてみませんか」</h2>
+      <p>日々の暮らしの中で、ふと立ち止まってしまった時。どちらの道へ進むべきか、霧の中を歩いているような時。<br>
+        日々の暮らしの中で、ふと立ち止まってしまった時。どちらの道へ進むべきか、霧の中を歩いているような時。<br>
+        神主 増田伸江が、茶吉尼天尊の神通力を通じて、あなたの魂が本来望んでいる「答え」を共に探し出します。<br>
+        それは、一方的な助言ではなく、あなた自身の内側にある「光」を再発見する、静かで濃密なひとときです。</p>
+      </ul>
+    </div>
+    <!-- ご相談費用（初穂料）を表示する場合。内容を入れたらコメント解除 -->
+    <!--
+    <div class="ref-box" aria-label="初穂料">
+      <h2>ご相談費用</h2>
+      <ul class="ref-list">
+        <li>ご相談費用・・・</li>
+        <li>ご相談と授与品・・・</li>
+      </ul>
+      <p>注意書き・・・</p>
+    </div>
+    -->
+    <!-- ご予約についてを表示する場合。内容を入れたらコメント解除 -->
+    <!--
+    <div class="ref-box" aria-label="御予約">
+      <h2>ご予約について</h2>
+      <ul class="ref-list">
+        <li>ご予約は・・・</li>
+        <li>●日前までに・・・</li>
+        <li>お支払いは・・・</li>
+      </ul>
+      <p>注意書き・・・</p>
+    </div>
+    -->
+    <!-- 受付時間を表示する場合。内容を入れたらコメント解除 -->
+    <!--
+    <div class="ref-box" aria-label="受付時間">
+      <h2>受付時間</h2>
+      <ul class="ref-list">
+        <li>受付時間は・・・</li>
+        <li>フォームから申し込み・・・</li>
+        <li>お電話での受付は・・・</li>
+      </ul>
+      <p>注意書き・・・</p>
+    </div>
+    -->
+    <!-- お申込み方法を表示する場合。内容を入れたらコメント解除 -->
+    <!--
+    <div class="ref-box" aria-label="お申込み方法">
+      <h2>お申込み方法</h2>
+      <ul class="ref-list">
+        <li>お申込み方法は・・・</li>
+        <li>事前予約は・・・</li>
+      </ul>
+      <p>注意書き・・・</p>
+    </div>
+    -->
+    <div class="ref-box" aria-label="お悩み相談の流れ ">
+      <h2>ご相談の流れ</h2>
+      <ul class="ref-list">
+        <li><span>1. 「神通・霧晴（きりはらし）の対話」</span><br>
+          現在の状況を整理し、心の霧を払います。<br>
+          何が原因で滞っているのか、神様の視点から現状を紐解くことで、次の一歩を「いつ、どのように」踏み出すべきかを明確にします。 </li>
+        <li><span>2. 「謙遜・自己回帰（じこかいき）の導き」</span><br>
+          「自分らしさ」を見失ってしまった方へ。
+          あなたの内に眠る本当の才能や美徳を再確認します。周囲の雑音を遮断し、自分自身の軸を再び整えます。 </li>
+        <li><span>3. 「良縁・枝打ち（えだうち）相談」</span><br>
+          人間関係や仕事のご縁に関するお悩みの場合、<br>
+          どの縁を大切にし、どの縁をそっと手放すべきか。あなたの人生をより豊かにする「ご縁の整理整頓」をお手伝いします。 </li>
+        <li><span>4. 「言霊（ことだま）浄化」</span><br>
+          相談の最後に、あなたの願いを「神様へ届く言葉」へと整え、一緒に唱えます。<br>
+          神通力を言葉に乗せ、悩みを「希望」へと変換して魂に定着させる、こゆるり神社ならではの締めくくりです。 </li>
+      </ul>
+      <p>神主からのメッセージ</p>
+      <P>「神主としてお話を聞くことは、あなたの心という神域をお掃除することに似ています。<br>
+        お話しいただくことで、溜まってしまった心の澱（おり）を流し、茶吉尼天尊の清々しい神通力が入り込む隙間を作ります。<br>
+        形式張った場所ではありません。お茶を飲むように、ゆるりと、しかし真心を込めて。<br>
+        あなたの『時』が再び輝き出すお手伝いをさせていただきます。」</P>
+    </div>
+    <div class="spacer-m"></div>
+    
+    <!-- お悩み相談のよくあるご質問（Q&Aアコーディオン）。表示する場合はコメント解除 -->
+    <!--
+        <h2 class="ref-title">お悩み相談のよくあるご質問</h2>
+        <div class="ref-divider" aria-hidden="true"></div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header" type="button" aria-expanded="false">
+              <span class="accordion-q">Q</span>
+              <span class="accordion-question">時間内なら幾つでも相談できますか？</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-a">
+                <span class="accordion-a-badge">A</span>
+                <span class="accordion-answer">お答え</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" type="button" aria-expanded="false">
+              <span class="accordion-q">Q</span>
+              <span class="accordion-question">相談料のお支払い方法は？</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-a">
+                <span class="accordion-a-badge">A</span>
+                <span class="accordion-answer">各種カード支払いがお使いいただけます</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" type="button" aria-expanded="false">
+              <span class="accordion-q">Q</span>
+              <span class="accordion-question">相談時間はどのくらいですか？</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-a">
+                <span class="accordion-a-badge">A</span>
+                <span class="accordion-answer">ご相談自体は約●分程度です。受付や準備を含めると●分ほどお時間をいただいております。</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header" type="button" aria-expanded="false">
+              <span class="accordion-q">Q</span>
+              <span class="accordion-question">本人が相談できない場合は代理でもいいですか？</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body">
+              <div class="accordion-a">
+                <span class="accordion-a-badge">A</span>
+                <span class="accordion-answer">ご本人がご参拝できない場合は、難しい場合もございますので詳しくはお問い合わせください。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+         -->
+    
+    <div class="spacer-l"></div>
+    
+    <!-- 初穂料カード -->
+    <h2 class="ref-title">オンラインでのお納め</h2>
+    <div class="ref-divider" aria-hidden="true"></div>
+    <p class="ref-text-center">オンラインで相談料をお納めいただけます。</p>
+    <div class="spacer-m"></div>
+    <div class="payment-card">
+      <div class="payment-card-logo"> <img src="./images/logo.png" alt="こゆるり神社"> </div>
+      <div class="payment-card-name">相談費用　30分</div>
+      <div class="payment-card-price">¥5,000</div>
+      <!-- 金額の補足表示（必要ならコメント解除） -->
+      <!-- <div class="payment-card-note">金額を変更できます</div> --> 
+      <a href="https://buy.stripe.com/3cIbJ10DM27K08Adl82B200" class="payment-card-btn" target="_blank" rel="noopener">お納めする</a>
+      <div class="payment-card-methods"> サポートされている決済手段：
+        <div class="payment-icons"> <span class="payment-icon payment-icon--mc"></span> <span class="payment-icon payment-icon--visa"></span> <span class="payment-icon payment-icon--jcb">JCB</span> <span class="payment-icon payment-icon--amex">AMEX</span> <span class="payment-icon payment-icon--link"></span> </div>
+      </div>
+    </div>
+    <div class="spacer-l"></div>
+  </section>
+</main>
+<footer class="prose">
+  <!-- フッターSNSリンク（Instagram/Facebook/X を表示する場合はコメント解除） -->
+  <!--
+      <div class="footer-sns">
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+        </a>
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="X">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+  -->
+  <address>こゆるり神社<br>
+    〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
+    お問い合わせ：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a></address>
+  <div class="footer-links" aria-label="フッターリンク"> <a href="tos.html" aria-label="利用規約">利用規約</a> <span class="sep" aria-hidden="true">|</span> <a href="privacy.html" aria-label="プライバシー・ポリシー">プライバシー・ポリシー</a> <span class="sep" aria-hidden="true">|</span> <a href="required-information.html" aria-label="特定商取引法に基づく表示">特定商取引法に基づく表示</a> </div>
+  <div style="margin-top:8px;">&copy; 2026 こゆるり神社 All Rights Reserved.</div>
+</footer>
+<aside id="spNav" class="sp-nav" aria-hidden="true">
+  <div class="sp-panel" role="dialog" aria-modal="true" aria-label="メニュー">
+    <div class="sp-head">
+      <p class="sp-title">小さな神社の大きな御利益</p>
+      <button class="icon-btn sp-close" type="button" aria-label="メニューを閉じる"> <img src="./images/close.png" alt=""> </button>
+    </div>
+    <div class="brand" aria-label="こゆるり神社">
+      <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
+      <div class="brand-title">こゆるり神社</div>
+    </div>
+    <ul class="sp-menu">
+      <li><a href="index.html">小さな神社の大きなご利益</a></li>
+      <li><a href="yurai.html">由来</a></li>
+      <li><a href="gosaijin.html">御祭神</a></li>
+      <li><a href="gokitou.html">ご祈祷</a></li>
+      <li><a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </div>
+</aside>
+</div>
+
+<!-- 固定CTA（PC：右縦） -->
+<nav class="fixed-cta fixed-cta--pc" aria-label="固定ボタン（PC）"> <a class="cta-contact" href="contact.html" aria-label="お問い合わせへ">お問い合わせ</a> <a class="cta-goods" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ">授与品</a> </nav>
+
+<!-- 固定CTA（SP：下横） -->
+<nav class="fixed-cta fixed-cta--sp" aria-label="固定ボタン（SP）">
+  <div class="cta-row"> <a class="cta-contact" href="contact.html" aria-label="お問い合わせへ">お問い合わせ</a> <a class="cta-goods" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ">授与品</a> </div>
+</nav>
+
+<!-- 上に戻る -->
+<button id="backToTop" class="back-to-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+<script src="./script.js" defer></script>
+</body>
+</html>

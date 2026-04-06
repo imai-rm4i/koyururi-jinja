@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>お知らせ一覧 | こゆるり神社</title>
+<meta name="description" content="こゆるり神社からのお知らせ一覧">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+<link rel="stylesheet" href="./style.css">
+<style>
+/* お知らせ一覧ページ専用スタイル */
+.news-page-header {
+    text-align: center;
+    padding: 30px 14px 20px;
+}
+.news-page-title {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    margin: 0 0 8px;
+}
+.news-page-divider {
+    width: 42px;
+    height: 1px;
+    background: rgba(166,139,91,0.75);
+    margin: 0 auto;
+    border-radius: 999px;
+}
+.news-full-list {
+    display: grid;
+    gap: 20px;
+    padding: 0 14px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.news-full-item {
+    background: rgba(255,255,255,0.70);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+.news-full-date {
+    font-family: var(--font-round);
+    font-size: 12px;
+    color: var(--color-text-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+.news-full-title {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--color-text);
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+.news-full-body {
+    font-family: var(--font-round);
+    font-size: 14px;
+    color: var(--color-text);
+    letter-spacing: 0.06em;
+    line-height: 1.9;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    margin-bottom: 14px;
+}
+.news-full-images {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.news-full-images img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--color-bg-warm);
+    cursor: pointer;
+}
+.news-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 20px;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-round);
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    margin: 0 14px 20px;
+}
+.news-back:hover {
+    text-decoration: none;
+    background: rgba(184,162,133,0.12);
+}
+/* ページネーション */
+.pager {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 0 14px 20px;
+}
+.pager a {
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    color: var(--color-text);
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: var(--font-round);
+    font-size: 14px;
+    min-width: 44px;
+    text-align: center;
+}
+.pager a:hover {
+    text-decoration: none;
+    background: rgba(184,162,133,0.12);
+}
+.pager a[aria-current="page"] {
+    background: var(--color-text);
+    color: var(--color-white);
+    border-color: var(--color-text);
+}
+.pager .disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+.status {
+    font-family: var(--font-round);
+    font-size: 13px;
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 0 14px 16px;
+}
+/* Lightbox */
+.lb-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.lb-backdrop.is-open {
+    display: flex;
+}
+.lb-box {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+.lb-img {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    display: block;
+}
+.lb-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+.lb-hint {
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+.news-full-images {
+    grid-template-columns: repeat(3, 1fr);
+}
+}
+</style>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <div class="header-inner">
+      <div class="brand" aria-label="サイト名">
+        <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
+        <div class="brand-title">こゆるり神社</div>
+      </div>
+      <p class="header-catch">小さな神社の大きなご利益</p>
+      <div class="header-actions"> <a class="icon-btn" href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener" aria-label="授与品へ"> <img src="./images/shop.png" alt=""> </a>
+        <button
+            class="icon-btn menu-btn"
+            type="button"
+            aria-label="メニューを開く"
+            aria-controls="spNav"
+            aria-expanded="false"
+            data-open-src="./images/open.png"
+            data-close-src="./images/close.png"
+          > <img src="./images/open.png" alt=""> </button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="wrap">
+  <div class="news-page-header">
+    <h1 class="news-page-title">お知らせ</h1>
+    <div class="news-page-divider"></div>
+  </div>
+  <a href="./index.html" class="news-back">← トップへ戻る</a>
+  <div class="status" id="status"></div>
+  <div id="newsFullList" class="news-full-list">
+    <p class="news-loading" style="text-align:center;color:var(--color-text-light);">お知らせを読み込んでいます...</p>
+    <noscript><p style="text-align:center;color:var(--color-text-light);">JavaScriptが無効のためお知らせ一覧を表示できません。JavaScriptを有効にするか、<a href="./index.html">トップページ</a>をご確認ください。</p></noscript>
+  </div>
+  <nav class="pager" id="pager" aria-label="ページネーション"></nav>
+  <a href="./index.html" class="news-back">← トップへ戻る</a>
+  <footer class="prose" style="margin-top: 20px;">
+    <address>こゆるり神社<br>
+      〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
+      お問い合わせ：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a></address>
+    <div class="footer-links" aria-label="フッターリンク"> <a href="tos.html" aria-label="利用規約">利用規約</a> <span class="sep" aria-hidden="true">|</span> <a href="privacy.html" aria-label="プライバシー・ポリシー">プライバシー・ポリシー</a> <span class="sep" aria-hidden="true">|</span> <a href="required-information.html" aria-label="特定商取引法に基づく表示">特定商取引法に基づく表示</a> </div>
+    <div style="margin-top:8px;">&copy; 2026 こゆるり神社 All Rights Reserved.</div>
+  </footer>
+  <aside id="spNav" class="sp-nav" aria-hidden="true">
+    <div class="sp-panel" role="dialog" aria-modal="true" aria-label="メニュー">
+      <div class="sp-head">
+        <p class="sp-title">小さな神社の大きな御利益</p>
+        <button class="icon-btn sp-close" type="button" aria-label="メニューを閉じる"> <img src="./images/close.png" alt=""> </button>
+      </div>
+      <div class="brand" aria-label="サイト名">
+        <div class="brand-logo"> <img src="./images/logo.png" alt=""> </div>
+        <div class="brand-title">こゆるり神社</div>
+      </div>
+      <ul class="sp-menu">
+        <li><a href="./index.html">小さな神社の大きなご利益</a></li>
+        <li><a href="./index.html">トップ</a></li>
+        <li><a href="./yurai.html">由来</a></li>
+        <li><a href="./gosaijin.html">御祭神</a></li>
+        <li><a href="./index.html#gokitou">ご祈祷</a></li>
+        <li><a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a></li>
+        <li><a href="./index.html#goods">写真</a></li>
+        <li><a href="./contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+<button id="backToTop" class="back-to-top" type="button" aria-label="ページ上部へ戻る">↑</button>
+
+<!-- Lightbox -->
+<div class="lb-backdrop" id="lightbox">
+  <div class="lb-box" role="dialog" aria-modal="true" aria-label="画像プレビュー">
+    <button type="button" class="lb-close" aria-label="閉じる">×</button>
+    <img class="lb-img" alt="">
+    <div class="lb-hint">クリック or ESC で閉じる</div>
+  </div>
+</div>
+<script src="./script.js" defer></script> 
+<script>
+  (function(){
+    const NEWS_URL = './news.json';
+    const PER_PAGE = 10;
+
+    const listEl   = document.getElementById('newsFullList');
+    const pagerEl  = document.getElementById('pager');
+    const statusEl = document.getElementById('status');
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('.lb-img');
+    const lbClose = lb.querySelector('.lb-close');
+
+    function openLightbox(src){
+      lbImg.src = src;
+      lb.classList.add('is-open');
+    }
+    function closeLightbox(){
+      lb.classList.remove('is-open');
+      lbImg.src = '';
+    }
+    lb.addEventListener('click', (e) => { if(e.target === lb) closeLightbox(); });
+    lbClose.addEventListener('click', closeLightbox);
+    window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+    function escapeHtml(str){
+      if(!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatDate(dateStr){
+      if(!dateStr) return '';
+      const parts = dateStr.split('-');
+      if(parts.length !== 3) return dateStr;
+      const y = parseInt(parts[0], 10);
+      const m = parseInt(parts[1], 10);
+      const d = parseInt(parts[2], 10);
+      return y + '年' + m + '月' + d + '日';
+    }
+
+    function getPage(){
+      const p = parseInt(new URLSearchParams(location.search).get('page') || '1', 10);
+      return p > 0 ? p : 1;
+    }
+
+    function setPage(p){
+      const sp = new URLSearchParams(location.search);
+      sp.set('page', p);
+      history.pushState(null, '', location.pathname + '?' + sp.toString());
+    }
+
+    function renderList(items){
+      listEl.innerHTML = '';
+
+      if(!items.length){
+        listEl.innerHTML = '<p style="text-align:center;color:var(--color-text-light);">お知らせがありません</p>';
+        return;
+      }
+
+      items.forEach(function(item){
+        const date = formatDate(item.date || '');
+        const title = escapeHtml(item.title || '');
+        const body = escapeHtml(item.body || '');
+        const images = item.images || [];
+
+        let html = '<article class="news-full-item">';
+        if(date) html += '<div class="news-full-date">' + date + '</div>';
+        if(title) html += '<div class="news-full-title">' + title + '</div>';
+        if(body) html += '<div class="news-full-body">' + body + '</div>';
+
+        if(images.length > 0){
+          html += '<div class="news-full-images">';
+          images.forEach(function(img){
+            const src = './' + img.replace(/\\\//g, '/');
+            html += '<img src="' + escapeHtml(src) + '" alt="" loading="lazy" data-lb-src="' + escapeHtml(src) + '">';
+          });
+          html += '</div>';
+        }
+
+        html += '</article>';
+        listEl.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+    function renderPager(page, total){
+      pagerEl.innerHTML = '';
+      if(total <= 1) return;
+
+      function link(label, p, dis, cur){
+        const a = document.createElement('a');
+        a.textContent = label;
+        a.href = '?page=' + p;
+        if(cur) a.setAttribute('aria-current', 'page');
+        if(dis) a.classList.add('disabled');
+        a.onclick = function(e){
+          e.preventDefault();
+          if(!dis) go(p);
+        };
+        return a;
+      }
+
+      pagerEl.appendChild(link('←', page - 1, page <= 1, false));
+      for(let i = 1; i <= total; i++){
+        pagerEl.appendChild(link(String(i), i, false, i === page));
+      }
+      pagerEl.appendChild(link('→', page + 1, page >= total, false));
+    }
+
+    let all = [];
+
+    function go(page){
+      const total = Math.ceil(all.length / PER_PAGE);
+      const p = Math.min(Math.max(1, page), total || 1);
+
+      setPage(p);
+
+      const start = (p - 1) * PER_PAGE;
+      const slice = all.slice(start, start + PER_PAGE);
+
+      renderList(slice);
+      renderPager(p, total);
+
+      if(all.length > 0){
+        statusEl.textContent = all.length + '件中 ' + (start + 1) + '〜' + Math.min(start + PER_PAGE, all.length) + '件を表示';
+      } else {
+        statusEl.textContent = '';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function init(){
+      try {
+        const res = await fetch(NEWS_URL + '?t=' + Date.now(), { cache: 'no-store' });
+        all = await res.json();
+        all.sort(function(a, b){
+          const aTime = a.datetime || a.date || '';
+          const bTime = b.datetime || b.date || '';
+          return bTime.localeCompare(aTime);
+        });
+        go(getPage());
+      } catch(e){
+        listEl.innerHTML = '<p style="text-align:center;color:var(--color-text-light);">お知らせを読み込めませんでした</p>';
+      }
+    }
+
+    window.addEventListener('popstate', function(){ go(getPage()); });
+
+    // 画像クリックでLightbox
+    document.addEventListener('click', function(e){
+      const img = e.target.closest('img[data-lb-src]');
+      if(img) openLightbox(img.getAttribute('data-lb-src'));
+    });
+
+    init();
+  })();
+  </script>
+</body>
+</html>
