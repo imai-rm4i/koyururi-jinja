@@ -317,6 +317,15 @@
       display: block;
     }
 
+    .about-subtitle {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
     .about-text {
       font-size: 0.9rem;
       line-height: 2.1;
@@ -550,12 +559,12 @@
       </a>
 
       <nav>
-        <a href="./index.html" class="active">ホーム</a>
-        <a href="./yurai.html">ご由緒</a>
+        <a href="./index.html" class="active">Home</a>
+        <a href="./yurai.html">由来</a>
         <a href="./gosaijin.html">御祭神</a>
         <a href="./gokitou.html">ご祈祷</a>
+        <a href="./onayami.html">お悩み相談</a>
         <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
-        <a href="./access.html">アクセス</a>
         <a href="./contact.html">お問い合わせ</a>
       </nav>
 
@@ -568,12 +577,12 @@
   <!-- モバイルメニュー -->
   <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true">
     <button class="mobile-close" id="menuClose" aria-label="閉じる">✕</button>
-    <a href="./index.html">ホーム</a>
-    <a href="./yurai.html">ご由緒</a>
+    <a href="./index.html">Home</a>
+    <a href="./yurai.html">由来</a>
     <a href="./gosaijin.html">御祭神</a>
     <a href="./gokitou.html">ご祈祷</a>
+    <a href="./onayami.html">お悩み相談</a>
     <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
-    <a href="./access.html">アクセス</a>
     <a href="./contact.html">お問い合わせ</a>
   </div>
 
@@ -592,22 +601,32 @@
 
   <!-- ===== ABOUT ===== -->
   <section class="about">
-    <h2 class="section-title">当神社について</h2>
+    <h2 class="section-title">こゆるり神社について</h2>
     <div class="about-box">
       <span class="c c-tl"></span>
       <span class="c c-tr"></span>
       <span class="c c-bl"></span>
       <span class="c c-br"></span>
       <div class="gold-line"><span></span></div>
+
+      <h3 class="about-subtitle">由来</h3>
       <p class="about-text">
-        本瑞寺のお膝元にある「茶吉尼天尊」が前身。<br>
-        宮司が神主資格を自ら取得し、管理を引き継いだ個人運営の神社です。<br>
-        大正11年（1922年）に茨城県東海村「村松虚空蔵尊」より<br>
-        三崎に分霊され、地域の人々の信仰を集めてまいりました。<br>
-        <br>
-        小さな神社ながら、大きなご利益で皆様をお迎えします。
+        かつて「出世稲荷茶吉尼天尊」として祀られていたものを、私が宮司として管理を引継ぎ「こゆるり神社」としてお祀りしています。<br>
+        本宮は神奈川県三浦市三崎にあり、県内の大和市にも小さな社を設けてお祀りしています。
       </p>
-      <div class="gold-line"><span></span></div>
+
+      <div class="gold-line" style="margin: 28px 0;"><span></span></div>
+
+      <h3 class="about-subtitle">この神社をお守りしたいと思ったきっかけ</h3>
+      <p class="about-text">
+        私のひいおばあさんは三崎に住んでおりました。目が見えなくなった際、この小さな神社にお参りを続けたところ、治ったと言われています。「この神社を受け継いでね」と祖母に託され、それからずっと大切にお参りを続けてきました。<br>
+        <br>
+        さらに、私の母は6年間子どもに恵まれませんでしたが、祖母が願掛けをしたところ、翌年に私が生まれました。<br>
+        <br>
+        そのような経緯から、今日まで大切に思い続けてきた神社です。
+      </p>
+
+      <div class="gold-line" style="margin-top: 28px; margin-bottom: 0;"><span></span></div>
     </div>
   </section>
 
@@ -696,7 +715,7 @@
           <div class="footer-address">
             〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
             TEL：お問い合わせフォームよりご連絡ください<br>
-            E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
+            E-mail：<a href="/cdn-cgi/l/email-protection#98fbf7f6ecf9fbecd8f3f7e1edeaedeaf1b5f2f1f6f2f9b6fbf7f5"><span class="__cf_email__" data-cfemail="d2b1bdbca6b3b1a692b9bdaba7a0a7a0bbffb8bbbcb8b3fcb1bdbf">[email&#160;protected]</span></a>
           </div>
 
           <div class="footer-links">
@@ -723,7 +742,7 @@
     </div>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // モバイルメニュー
     const menuBtn    = document.getElementById('menuBtn');
     const menuClose  = document.getElementById('menuClose');
@@ -736,13 +755,4 @@
     );
 
     // スクロールでヘッダーシャドウ
-    window.addEventListener('scroll', () => {
-      document.getElementById('site-header').style.boxShadow =
-        window.scrollY > 20
-          ? '0 4px 24px rgba(155,26,26,0.18)'
-          : '0 2px 16px rgba(155,26,26,0.08)';
-    });
-  </script>
-
-</body>
-</html>
+    window
