@@ -48,9 +48,11 @@
       <a href="./index.html">ホーム</a>
       <a href="./yurai.html">由来</a>
       <a href="./gosaijin.html">御祭神</a>
+      <a href="./guji.html">宮司紹介</a>
       <a href="./gokitou.html">ご祈祷</a>
       <a href="./onayami.html">お悩み相談</a>
       <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+      <a href="./nenchu.html">年中行事案内</a>
       <a href="./contact.html">お問い合わせ</a>
     </nav>
   </div>
@@ -60,9 +62,11 @@
       <a href="./index.html">ホーム</a>
       <a href="./yurai.html">由来</a>
       <a href="./gosaijin.html">御祭神</a>
+      <a href="./guji.html">宮司紹介</a>
       <a href="./gokitou.html">ご祈祷</a>
       <a href="./onayami.html">お悩み相談</a>
       <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+      <a href="./nenchu.html">年中行事案内</a>
       <a href="./contact.html">お問い合わせ</a>
   </div>
 </nav>
@@ -94,7 +98,7 @@
         </div>
         <div class="footer-address">
           〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
-          E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
+          E-mail：<a href="/cdn-cgi/l/email-protection#6605090812070512260d091f131413140f4b0c0f080c074805090b"><span class="__cf_email__" data-cfemail="ff9c90918b9e9c8bbf9490868a8d8a8d96d2959691959ed19c9092">[email&#160;protected]</span></a>
         </div>
         <div class="footer-links">
           <a href="./tos.html">利用規約</a>
@@ -110,7 +114,7 @@
     </div>
   </div>
 </footer>
-<script src="./script.js" defer></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="./script.js" defer></script>
 
 <div class="lb-backdrop" id="lightbox">
   <div class="lb-box" role="dialog" aria-modal="true" aria-label="画像プレビュー">
@@ -168,12 +172,4 @@
   async function init(){
     try{var res=await fetch(NEWS_URL+'?t='+Date.now(),{cache:'no-store'});all=await res.json();
     all.sort(function(a,b){return(b.datetime||b.date||'').localeCompare(a.datetime||a.date||'');});go(getPage());}
-    catch(e){listEl.innerHTML='<p style="text-align:center;color:#7a6040;">お知らせを読み込めませんでした</p>';}
-  }
-  window.addEventListener('popstate',function(){go(getPage());});
-  document.addEventListener('click',function(e){var img=e.target.closest('img[data-lb-src]');if(img)openLb(img.getAttribute('data-lb-src'));});
-  init();
-})();
-</script>
-</body>
-</html>
+    catch(e){listEl.innerHTML='<p style="text-align:center;color:#7a6040;">お知らせを読み込めませんでした</p>';
