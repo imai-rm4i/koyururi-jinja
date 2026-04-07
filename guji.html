@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>宮司紹介 | こゆるり神社</title>
+<meta name="description" content="こゆるり神社 宮司・増田伸江のご紹介。神職の祈りと専門的な心理支援の両輪で、あなたの人生に寄り添います。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+/* ── 宮司紹介専用スタイル ── */
+
+/* プロフィールヒーロー */
+.guji-hero {
+  max-width: 760px;
+  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 40px;
+  align-items: center;
+}
+
+.guji-hero-text {}
+
+.guji-catch {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #9b1a1a;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+  border-left: 4px solid #9b1a1a;
+  padding-left: 16px;
+}
+
+.guji-name-block {
+  margin-bottom: 20px;
+}
+.guji-title-label {
+  font-size: 0.78rem;
+  color: #7a6040;
+  letter-spacing: 0.16em;
+  display: block;
+  margin-bottom: 4px;
+}
+.guji-name {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e1209;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+.guji-name-romaji {
+  display: block;
+  font-size: 0.72rem;
+  color: #7a6040;
+  letter-spacing: 0.18em;
+  margin-top: 6px;
+}
+
+.guji-photo {
+  position: relative;
+}
+.guji-photo-frame {
+  background: #fff;
+  border: 1px solid #d4b896;
+  padding: 10px;
+  box-shadow: 0 4px 20px rgba(155,26,26,0.10);
+  position: relative;
+}
+/* 四隅の金装飾 */
+.guji-photo-frame::before {
+  content: "";
+  position: absolute; top: 4px; left: 4px;
+  width: 16px; height: 16px;
+  border-top: 2px solid #c9a84c; border-left: 2px solid #c9a84c;
+}
+.guji-photo-frame::after {
+  content: "";
+  position: absolute; bottom: 4px; right: 4px;
+  width: 16px; height: 16px;
+  border-bottom: 2px solid #c9a84c; border-right: 2px solid #c9a84c;
+}
+.guji-photo-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+/* 写真がない場合のプレースホルダー */
+.guji-photo-placeholder {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #fce8e8 0%, #f5ede0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #9b1a1a;
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+.guji-photo-placeholder svg {
+  opacity: 0.45;
+}
+
+/* 略歴ブロック */
+.career-section {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 28px;
+}
+
+.career-block {
+  background: #fff;
+  border: 1px solid #d4b896;
+  border-top: 3px solid #9b1a1a;
+  padding: 24px 28px;
+  position: relative;
+}
+
+.career-block-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #9b1a1a;
+  letter-spacing: 0.12em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.career-block-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, #d4b896, transparent);
+}
+
+.career-items {
+  display: grid;
+  gap: 10px;
+}
+
+.career-item {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.88rem;
+  color: #4a3520;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+}
+.career-item::before {
+  content: "◆";
+  color: #c9a84c;
+  font-size: 0.6rem;
+  flex-shrink: 0;
+  margin-top: 0.3em;
+}
+
+/* タグ形式の資格一覧 */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.skill-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #fdf8f3;
+  border: 1px solid #d4b896;
+  font-size: 0.78rem;
+  color: #4a3520;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+}
+
+/* メッセージブロック */
+.guji-message {
+  max-width: 760px;
+  margin: 40px auto 0;
+  background: #fdf8f3;
+  border: 1px solid #d4b896;
+  padding: 36px 40px;
+  position: relative;
+  text-align: center;
+}
+.guji-message::before {
+  content: ""; position: absolute;
+  top: -1px; left: -1px; width: 20px; height: 20px;
+  border-top: 3px solid #c9a84c; border-left: 3px solid #c9a84c;
+}
+.guji-message::after {
+  content: ""; position: absolute;
+  bottom: -1px; right: -1px; width: 20px; height: 20px;
+  border-bottom: 3px solid #c9a84c; border-right: 3px solid #c9a84c;
+}
+.guji-message-quote {
+  font-size: 2rem;
+  color: #c9a84c;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+.guji-message-text {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e1209;
+  line-height: 2.0;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 680px) {
+  .guji-hero {
+    grid-template-columns: 1fr;
+  }
+  .guji-photo {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .guji-catch { font-size: 1rem; }
+  .guji-name  { font-size: 1.6rem; }
+  .career-block { padding: 18px 18px; }
+  .guji-message { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="./index.html" class="logo">
+      <img src="./images/logo.png" alt="こゆるり神社ロゴ" onerror="this.style.display='none'">
+      <div class="logo-text-wrap">
+        <span class="logo-name">こゆるり神社</span>
+        <span class="logo-romaji">Koyururi Shrine</span>
+      </div>
+    </a>
+    <nav class="nav-pc">
+      <a href="./index.html">ホーム</a>
+      <a href="./yurai.html">由来</a>
+      <a href="./gosaijin.html">御祭神</a>
+      <a href="./gokitou.html">ご祈祷</a>
+      <a href="./onayami.html">お悩み相談</a>
+      <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+      <a href="./contact.html">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- スマホ横スクロールナビ -->
+<nav class="nav-mobile" id="navMobile">
+  <div class="nav-mobile-inner">
+    <a href="./index.html">ホーム</a>
+    <a href="./yurai.html">由来</a>
+    <a href="./gosaijin.html">御祭神</a>
+    <a href="./gokitou.html">ご祈祷</a>
+    <a href="./onayami.html">お悩み相談</a>
+    <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+    <a href="./contact.html">お問い合わせ</a>
+  </div>
+</nav>
+
+
+<!-- ===== PAGE HERO ===== -->
+<div class="page-hero">
+  <video autoplay muted loop playsinline>
+    <source src="./images/hero.mp4" type="video/mp4">
+  </video>
+</div>
+<nav class="pills" aria-label="ページ内メニュー">
+  <a class="pill" href="yurai.html">由来</a>
+  <a class="pill" href="gosaijin.html">御祭神</a>
+  <a class="pill" href="gokitou.html">ご祈祷</a>
+  <a class="pill" href="onayami.html">お悩み相談</a>
+</nav>
+
+
+<!-- ===== MAIN ===== -->
+<main class="prose">
+  <section class="section section--ref">
+    <h1 class="ref-title">宮司紹介</h1>
+    <div class="ref-divider" aria-hidden="true"><span></span></div>
+
+    <!-- プロフィールヒーロー -->
+    <div class="guji-hero">
+
+      <div class="guji-hero-text">
+        <p class="guji-catch">「神職の祈り」と「専門的な心理支援」の両輪で、<br>あなたの人生に寄り添います。</p>
+        <div class="guji-name-block">
+          <span class="guji-title-label">こゆるり神社 宮司</span>
+          <p class="guji-name">増田 伸江</p>
+          <span class="guji-name-romaji">Nobue Masuda</span>
+        </div>
+        <p class="ref-text" style="margin:0;">2025年9月より、こゆるり神社の宮司に就任。神職としての祈りと、長年にわたる心理・福祉の専門的知識を組み合わせ、お参りくださる皆さまの心に寄り添う場づくりをしております。</p>
+      </div>
+
+      <div class="guji-photo">
+        <div class="guji-photo-frame">
+          <!-- 宮司の写真があれば src を差し替えてください -->
+          <img src="./images/guji.jpg" alt="宮司 増田伸江"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="guji-photo-placeholder" style="display:none;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b1a1a" stroke-width="1.5">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span>宮司写真</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- メッセージ -->
+    <div class="guji-message">
+      <div class="guji-message-quote">&#8220;</div>
+      <p class="guji-message-text">
+        神様は、あなたのそばにいます。<br>
+        小さな社であっても、心を込めてお参りすれば、<br>
+        必ずそのご縁は実を結びます。<br>
+        ゆるりと、しかし凛として、ともに歩みましょう。
+      </p>
+    </div>
+
+    <div class="gold-line" style="max-width:480px;margin:48px auto;"><span></span></div>
+
+    <!-- 略歴 -->
+    <h2 class="ref-title" style="font-size:1.2rem;margin-bottom:24px;">略歴</h2>
+
+    <div class="career-section">
+
+      <!-- 聖職・社会活動 -->
+      <div class="career-block">
+        <p class="career-block-title">⛩　聖職・社会活動（現在の中心）</p>
+        <div class="career-items">
+          <div class="career-item">こゆるり神社 宮司（2025年9月〜）</div>
+          <div class="career-item">ご縁紡ぎ大学 / 大久保寛司あり方塾（あり方の探究）</div>
+        </div>
+      </div>
+
+      <!-- 心のサポート -->
+      <div class="career-block">
+        <p class="career-block-title">🤝　心のサポート（心理・福祉の専門性）</p>
+        <div class="career-items">
+          <div class="career-item">認定心理カウンセラー / ポジティブ心理学インストラクター</div>
+          <div class="career-item">傾聴基礎・実践 / DV・虐待防止研修 / 介護職員初任者研修</div>
+          <div class="career-item">ひきこもり・大人の発達障がい支援 / 4つの電話相談ボランティア</div>
+          <div class="career-item">FAP上級修了 / 日本メンタルヘルス協会基礎修了</div>
+          <div class="career-item">デートDV研修修了 / 総合福祉カウンセリング認定心理カウンセラー</div>
+        </div>
+      </div>
+
+      <!-- 魂の探究 -->
+      <div class="career-block">
+        <p class="career-block-title">✨　魂の探究（占術・深層心理）</p>
+        <div class="career-items">
+          <div class="career-item">算命学鑑定 / 手相 / 数秘術</div>
+          <div class="career-item">ヒプノセラピー（催眠療法）</div>
+          <div class="career-item">イリスカラーセラピスト / 現代マヤ暦インストラクター</div>
+        </div>
+      </div>
+
+      <!-- 多彩な資質 -->
+      <div class="career-block">
+        <p class="career-block-title">🌟　多彩な資質（信頼と親しみ）</p>
+        <div class="skill-tags">
+          <span class="skill-tag">宅地建物取引士</span>
+          <span class="skill-tag">大型自動車免許</span>
+          <span class="skill-tag">牽引免許</span>
+          <span class="skill-tag">大型二輪免許</span>
+          <span class="skill-tag">温泉ソムリエ</span>
+          <span class="skill-tag">美容アドバイザー</span>
+          <span class="skill-tag">ほめ達！検定2級</span>
+          <span class="skill-tag">ほめ達！認定講師養成講座ベーシック修了</span>
+          <span class="skill-tag">ポジティブ心理学実践インストラクター</span>
+          <span class="skill-tag">心ケーション東京1期</span>
+          <span class="skill-tag">ご縁紡ぎ大学東京9期</span>
+          <span class="skill-tag">家族問題相談</span>
+          <span class="skill-tag">ギャンブル依存相談</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- お問い合わせCTA -->
+    <div style="text-align:center;margin-top:56px;padding-bottom:16px;">
+      <div class="gold-line" style="max-width:300px;margin:0 auto 32px;"><span></span></div>
+      <p class="ref-text" style="text-align:center;">ご祈祷・お悩み相談のご予約はお問い合わせよりお気軽にどうぞ。</p>
+      <a href="./contact.html"
+        style="display:inline-block;margin-top:20px;padding:14px 48px;background:#9b1a1a;color:#fff;font-family:'Shippori Mincho',serif;font-size:0.95rem;font-weight:600;letter-spacing:0.14em;text-decoration:none;transition:background 0.2s;"
+        onmouseover="this.style.background='#b52020'" onmouseout="this.style.background='#9b1a1a'">
+        お問い合わせ・ご予約
+      </a>
+    </div>
+
+  </section>
+</main>
+
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-info">
+      <div>
+        <div class="footer-logo">
+          <img src="./images/logo.png" alt="こゆるり神社" onerror="this.style.display='none'">
+          <div>
+            <span class="footer-logo-name">こゆるり神社</span>
+            <span class="footer-logo-romaji">Koyururi Shrine</span>
+          </div>
+        </div>
+        <div class="footer-address">
+          〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
+          E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
+        </div>
+        <div class="footer-links">
+          <a href="./tos.html">利用規約</a>
+          <a href="./privacy.html">プライバシーポリシー</a>
+          <a href="./required-information.html">特定商取引法に基づく表示</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2026 こゆるり神社 All Rights Reserved.</p>
+    </div>
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.0!2d139.619!3d35.154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019276ced5c2b81%3A0x7b9fee3c53a9bb49!2z44GT44f3441v44KoIOelnuexsQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="こゆるり神社 アクセスマップ">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+<script src="./script.js" defer></script>
+</body>
+</html>

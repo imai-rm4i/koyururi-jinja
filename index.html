@@ -195,6 +195,56 @@ if (!function_exists('h')) {
 </section>
 
 
+<!-- ===== 宮司紹介 ===== -->
+<section style="padding: 64px 24px; background: var(--cream-dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div style="max-width: 860px; margin: 0 auto;">
+    <h2 class="section-title" style="text-align:center; margin-bottom: 8px;">宮司紹介</h2>
+    <div class="gold-line" style="max-width: 180px; margin: 0 auto 40px;"><span></span></div>
+
+    <div style="display:grid; grid-template-columns: 140px 1fr; gap: 36px; align-items: center; background: #fff; border: 1px solid var(--border); border-top: 3px solid var(--red); padding: 32px;">
+
+      <!-- 写真 -->
+      <div style="position:relative;">
+        <div style="background:#fff; border: 1px solid var(--border); padding: 8px; position:relative; box-shadow: 0 4px 16px rgba(155,26,26,0.08);">
+          <!-- 金角装飾 -->
+          <span style="position:absolute;top:3px;left:3px;width:12px;height:12px;border-top:2px solid #c9a84c;border-left:2px solid #c9a84c;"></span>
+          <span style="position:absolute;bottom:3px;right:3px;width:12px;height:12px;border-bottom:2px solid #c9a84c;border-right:2px solid #c9a84c;"></span>
+          <img src="./images/guji.jpg" alt="宮司 増田伸江" style="width:100%;height:auto;display:block;object-fit:cover;aspect-ratio:3/4;"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <!-- 写真がない場合 -->
+          <div style="display:none; width:100%; aspect-ratio:3/4; background: linear-gradient(135deg,#fce8e8,#f5ede0); align-items:center; justify-content:center; flex-direction:column; gap:6px; color:#9b1a1a;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            <span style="font-size:0.7rem;letter-spacing:0.1em;">宮司写真</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- テキスト -->
+      <div>
+        <span style="font-size:0.72rem;color:#7a6040;letter-spacing:0.16em;display:block;margin-bottom:4px;">こゆるり神社 宮司</span>
+        <p style="font-family:'Shippori Mincho',serif;font-size:1.6rem;font-weight:800;color:#1e1209;letter-spacing:0.1em;line-height:1.2;margin-bottom:4px;">増田 伸江</p>
+        <span style="font-size:0.65rem;color:#7a6040;letter-spacing:0.16em;display:block;margin-bottom:16px;">Nobue Masuda</span>
+
+        <p style="font-family:'Shippori Mincho',serif;font-size:0.95rem;font-weight:600;color:#9b1a1a;line-height:1.75;letter-spacing:0.06em;margin-bottom:14px;border-left:3px solid #9b1a1a;padding-left:12px;">
+          「神職の祈り」と「専門的な心理支援」の両輪で、<br>あなたの人生に寄り添います。
+        </p>
+
+        <p style="font-size:0.85rem;color:#4a3520;line-height:1.95;letter-spacing:0.04em;margin-bottom:20px;">
+          2025年9月より宮司に就任。認定心理カウンセラー・算命学鑑定・ヒプノセラピーなど多彩な専門性を持ち、神職としての祈りと心理支援の両面からお参りの皆さまに寄り添います。
+        </p>
+
+        <a href="./guji.html"
+          style="display:inline-block;padding:11px 32px;background:#9b1a1a;color:#fff;font-family:'Shippori Mincho',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.12em;text-decoration:none;transition:background 0.2s;"
+          onmouseover="this.style.background='#b52020'" onmouseout="this.style.background='#9b1a1a'">
+          詳しく見る
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
 <!-- ===== お知らせ ===== -->
 <section style="padding: 64px 24px; background: var(--cream);">
   <div style="max-width: 780px; margin: 0 auto;">
