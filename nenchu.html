@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>年中行事案内 | こゆるり神社</title>
+<meta name="description" content="こゆるり神社の年中行事・特別ご祈祷案内。一月から十二月まで、季節ごとの特別な祈りをご案内します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+<style>
+/* ── 年中行事専用スタイル ── */
+
+/* 季節ブロック */
+.season-block {
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.season-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.season-badge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* 各季節カラー */
+.season-badge--spring { background: #fce8e8; color: #9b1a1a; border: 2px solid #e8b4b4; }
+.season-badge--early  { background: #e8f5e8; color: #2d6a2d; border: 2px solid #a8d4a8; }
+.season-badge--summer { background: #fff3e0; color: #b35400; border: 2px solid #f0c080; }
+.season-badge--autumn { background: #f5f0e8; color: #7a5c20; border: 2px solid #c9a84c; }
+
+.season-badge-month {
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+}
+.season-badge-kanji {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.season-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #9b1a1a;
+  letter-spacing: 0.1em;
+}
+.season-title-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: #7a6040;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+}
+
+/* 月別カード */
+.month-cards {
+  display: grid;
+  gap: 16px;
+}
+
+.month-card {
+  background: #fff;
+  border: 1px solid #d4b896;
+  border-left: 4px solid #9b1a1a;
+  padding: 20px 24px;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.month-card:hover {
+  box-shadow: 0 4px 20px rgba(155,26,26,0.10);
+}
+
+.month-card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.month-num {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #9b1a1a;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.month-num span {
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin-left: 2px;
+}
+
+.month-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.month-title-ja {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1e1209;
+  letter-spacing: 0.08em;
+}
+.month-title-kana {
+  font-size: 0.72rem;
+  color: #7a6040;
+  letter-spacing: 0.12em;
+}
+
+.month-desc {
+  font-size: 0.875rem;
+  line-height: 2.0;
+  color: #4a3520;
+  letter-spacing: 0.05em;
+}
+
+/* 仕切り線（季節間） */
+.season-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 40px auto;
+  max-width: 720px;
+}
+.season-divider::before,
+.season-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c9a84c, transparent);
+}
+.season-divider span {
+  font-size: 1rem;
+  color: #c9a84c;
+}
+
+@media (max-width: 600px) {
+  .month-card { padding: 16px 16px; }
+  .month-num  { font-size: 1.4rem; }
+  .month-title-ja { font-size: 0.95rem; }
+  .month-desc { font-size: 0.83rem; }
+  .season-badge { width: 52px; height: 52px; }
+  .season-badge-kanji { font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="./index.html" class="logo">
+      <img src="./images/logo.png" alt="こゆるり神社ロゴ" onerror="this.style.display='none'">
+      <div class="logo-text-wrap">
+        <span class="logo-name">こゆるり神社</span>
+        <span class="logo-romaji">Koyururi Shrine</span>
+      </div>
+    </a>
+    <nav class="nav-pc">
+      <a href="./index.html">ホーム</a>
+      <a href="./yurai.html">由来</a>
+      <a href="./gosaijin.html">御祭神</a>
+      <a href="./gokitou.html">ご祈祷</a>
+      <a href="./onayami.html">お悩み相談</a>
+      <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+      <a href="./contact.html">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- スマホ横スクロールナビ -->
+<nav class="nav-mobile" id="navMobile">
+  <div class="nav-mobile-inner">
+    <a href="./index.html">ホーム</a>
+    <a href="./yurai.html">由来</a>
+    <a href="./gosaijin.html">御祭神</a>
+    <a href="./gokitou.html">ご祈祷</a>
+    <a href="./onayami.html">お悩み相談</a>
+    <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+    <a href="./contact.html">お問い合わせ</a>
+  </div>
+</nav>
+
+
+<!-- ===== PAGE HERO ===== -->
+<div class="page-hero">
+  <video autoplay muted loop playsinline>
+    <source src="./images/hero.mp4" type="video/mp4">
+  </video>
+</div>
+<nav class="pills" aria-label="ページ内メニュー">
+  <a class="pill" href="yurai.html">由来</a>
+  <a class="pill" href="gosaijin.html">御祭神</a>
+  <a class="pill" href="gokitou.html">ご祈祷</a>
+  <a class="pill" href="onayami.html">お悩み相談</a>
+</nav>
+
+
+<!-- ===== MAIN ===== -->
+<main class="prose">
+  <section class="section section--ref">
+    <h1 class="ref-title">特別ご祈祷　年中行事案内</h1>
+    <div class="ref-divider" aria-hidden="true"><span></span></div>
+    <p class="ref-text" style="text-align:center;max-width:620px;margin:0 auto 40px;">
+      十二ヶ月それぞれの季節の気に合わせた、特別なご祈祷をご用意しております。<br>
+      その月ならではの祈りの言葉を通じて、神様とのご縁をより深くお結びください。
+    </p>
+
+    <!-- ══════════════════════════════
+         一月〜三月：春の息吹と志
+    ══════════════════════════════ -->
+    <div class="season-block">
+      <div class="season-heading">
+        <div class="season-badge season-badge--spring">
+          <span class="season-badge-month">1〜3月</span>
+          <span class="season-badge-kanji">春</span>
+        </div>
+        <div>
+          <p class="season-title">春の息吹と志
+            <span class="season-title-sub">January — March</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="month-cards">
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">1<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">瑞光新始</span>
+              <span class="month-title-kana">ずいこうしんし</span>
+            </div>
+          </div>
+          <p class="month-desc">一年の幕開けに、めでたい兆しの光（瑞光）が降り注ぎます。真っ白な心で新しい自分を「始め」、清らかな志を立てるための祈りです。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">2<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">初午祈祥</span>
+              <span class="month-title-kana">はつうまきしょう</span>
+            </div>
+          </div>
+          <p class="month-desc">お稲荷様の御縁日「初午」。冬の寒さに耐え、春を待つ命に吉祥（幸い）を招き入れます。商売繁盛や家内安全を願う、活気あふれる祈念です。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">3<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">春風招福</span>
+              <span class="month-title-kana">しゅんぷうしょうふく</span>
+            </div>
+          </div>
+          <p class="month-desc">厳冬を越え、万物が目覚める季節。柔らかな春の風に乗せて、あなたの元へ多くの福を呼び込み、心穏やかな門出を祝います。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="season-divider"><span>⛩</span></div>
+
+    <!-- ══════════════════════════════
+         四月〜六月：芽吹きと浄化
+    ══════════════════════════════ -->
+    <div class="season-block">
+      <div class="season-heading">
+        <div class="season-badge season-badge--early">
+          <span class="season-badge-month">4〜6月</span>
+          <span class="season-badge-kanji">初夏</span>
+        </div>
+        <div>
+          <p class="season-title">芽吹きと浄化
+            <span class="season-title-sub">April — June</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="month-cards">
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">4<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">青丹季咲</span>
+              <span class="month-title-kana">あおにきさき</span>
+            </div>
+          </div>
+          <p class="month-desc">古の都のように鮮やかな緑が芽吹き、生命が輝きだす季節。あなたの才能や運気が、この機に力強く「咲き誇る」ことを願う始まりの祈りです。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">5<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">翠風清心</span>
+              <span class="month-title-kana">すいふうせいしん</span>
+            </div>
+          </div>
+          <p class="month-desc">新緑を吹き抜ける清々しい風（翠風）に心をお預けください。日々の迷いや雑念を払い、心を真っ白に洗い流して、前を向く力を養います。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">6<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">瑠璃水無</span>
+              <span class="month-title-kana">るりみな</span>
+            </div>
+          </div>
+          <p class="month-desc">梅雨の晴れ間の瑠璃色の空と、命を潤す水に感謝を捧げます。半年の穢れを清らかな水で流し、心に瑞々しい潤いを取り戻す「夏越」の祈りです。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="season-divider"><span>⛩</span></div>
+
+    <!-- ══════════════════════════════
+         七月〜九月：情熱と実り
+    ══════════════════════════════ -->
+    <div class="season-block">
+      <div class="season-heading">
+        <div class="season-badge season-badge--summer">
+          <span class="season-badge-month">7〜9月</span>
+          <span class="season-badge-kanji">夏秋</span>
+        </div>
+        <div>
+          <p class="season-title">情熱と実り
+            <span class="season-title-sub">July — September</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="month-cards">
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">7<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">朱夏情熱</span>
+              <span class="month-title-kana">しゅかじょうねつ</span>
+            </div>
+          </div>
+          <p class="month-desc">生命エネルギーが最高潮に達する「朱（あか）の夏」。内に秘めた情熱を燃やし、停滞していた物事を一気に成就へと導く力強い祈念です。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">8<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">黄金穂実</span>
+              <span class="month-title-kana">こがねほみのり</span>
+            </div>
+          </div>
+          <p class="month-desc">夕暮れの光に輝く黄金色の稲穂。これまでのたゆまぬ努力が、確かな「実り」となってあなたに届くよう、豊穣の神に祈りを捧げます。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">9<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">白秋月光</span>
+              <span class="month-title-kana">はくしゅうげっこう</span>
+            </div>
+          </div>
+          <p class="month-desc">澄み渡る「白（しろ）の秋」。静かな月明かりの下で、自分自身を深く見つめ直し、神仏との静かな対話を通じて心の平安を導き出します。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="season-divider"><span>⛩</span></div>
+
+    <!-- ══════════════════════════════
+         十月〜十二月：福聚と感謝
+    ══════════════════════════════ -->
+    <div class="season-block">
+      <div class="season-heading">
+        <div class="season-badge season-badge--autumn">
+          <span class="season-badge-month">10〜12月</span>
+          <span class="season-badge-kanji">冬</span>
+        </div>
+        <div>
+          <p class="season-title">福聚と感謝
+            <span class="season-title-sub">October — December</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="month-cards">
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">10<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">神去福聚</span>
+              <span class="month-title-kana">かみさりふくじゅ</span>
+            </div>
+          </div>
+          <p class="month-desc">神々が出雲へ集う季節。留守を守る仏様や神様から、あふれるほどの福（福聚）を授かり、一年の豊かな仕上げに入るための祈りです。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">11<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">霜月感謝</span>
+              <span class="month-title-kana">しもつきかんしゃ</span>
+            </div>
+          </div>
+          <p class="month-desc">霜が降り、冬の足音が聞こえる頃。今ある幸せ、支えてくれる人々、すべての縁に深く感謝を捧げ、冷える魂を温かな光で包み込みます。</p>
+        </div>
+
+        <div class="month-card">
+          <div class="month-card-head">
+            <p class="month-num">12<span>月</span></p>
+            <div class="month-title-wrap">
+              <span class="month-title-ja">玄冬大祓</span>
+              <span class="month-title-kana">げんとうおおはらい</span>
+            </div>
+          </div>
+          <p class="month-desc">「玄（くろ）」は、新しい命を育む神秘的な暗闇。一年のすべてを祓い清め、清浄な心で次の春へ向けてエネルギーを蓄える、締めくくりの祈りです。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ご祈祷申込みボタン -->
+    <div style="text-align:center;margin-top:48px;padding-bottom:24px;">
+      <div class="gold-line" style="max-width:300px;margin:0 auto 32px;"><span></span></div>
+      <p class="ref-text" style="text-align:center;">特別ご祈祷のお申し込み・ご予約はお問い合わせよりお気軽にどうぞ。</p>
+      <a href="./contact.html" style="display:inline-block;margin-top:20px;padding:14px 48px;background:#9b1a1a;color:#fff;font-family:'Shippori Mincho',serif;font-size:0.95rem;font-weight:600;letter-spacing:0.14em;text-decoration:none;transition:background 0.2s;"
+        onmouseover="this.style.background='#b52020'" onmouseout="this.style.background='#9b1a1a'">
+        ご祈祷のお申し込み
+      </a>
+    </div>
+
+  </section>
+</main>
+
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-info">
+      <div>
+        <div class="footer-logo">
+          <img src="./images/logo.png" alt="こゆるり神社" onerror="this.style.display='none'">
+          <div>
+            <span class="footer-logo-name">こゆるり神社</span>
+            <span class="footer-logo-romaji">Koyururi Shrine</span>
+          </div>
+        </div>
+        <div class="footer-address">
+          〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
+          E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
+        </div>
+        <div class="footer-links">
+          <a href="./tos.html">利用規約</a>
+          <a href="./privacy.html">プライバシーポリシー</a>
+          <a href="./required-information.html">特定商取引法に基づく表示</a>
+        </div>
+      </div>
+      <p class="footer-copyright">&copy; 2026 こゆるり神社 All Rights Reserved.</p>
+    </div>
+    <div class="footer-map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.0!2d139.619!3d35.154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019276ced5c2b81%3A0x7b9fee3c53a9bb49!2z44GT44f3441v44KoIOelnuexsQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="こゆるり神社 アクセスマップ">
+      </iframe>
+    </div>
+  </div>
+</footer>
+
+<script src="./script.js" defer></script>
+</body>
+</html>
