@@ -1,18 +1,28 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>送信完了 | こゆるり神社</title>
-<meta name="description" content="こゆるり神社（神奈川県三浦市三崎）送信完了">
+<!-- ============================================================
+  【共通パーツ】yurai / gosaijin / gokitou / contact など
+  各ページのヘッダー・フッターをこのコードで差し替えてください。
+
+  ＜変更手順＞
+  1. <head>の<link>を下記に差し替え
+  2. <header>〜</header> を下記に差し替え
+  3. <nav class="nav-mobile">〜</nav> を追加
+  4. FVを .page-hero に変更（低めバナー）
+  5. <footer>〜</footer> を下記に差し替え
+  6. 現在のページの <a> に class="active" を付ける
+  ============================================================ -->
+
+
+<!-- ── <head> 内に追加 ─────────────────── -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./style.css">
-</head>
-<body>
+
+
+<!-- ── HEADER ────────────────────────────── -->
 <header id="site-header">
   <div class="header-inner">
+
     <a href="./index.html" class="logo">
       <img src="./images/logo.png" alt="こゆるり神社ロゴ" onerror="this.style.display='none'">
       <div class="logo-text-wrap">
@@ -20,6 +30,8 @@
         <span class="logo-romaji">Koyururi Shrine</span>
       </div>
     </a>
+
+    <!-- PC横ナビ：現在のページの<a>に class="active" を追加 -->
     <nav class="nav-pc">
       <a href="./index.html">ホーム</a>
       <a href="./yurai.html">由来</a>
@@ -29,43 +41,44 @@
       <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
       <a href="./contact.html">お問い合わせ</a>
     </nav>
+
   </div>
 </header>
+
+<!-- スマホ横スクロールナビ -->
 <nav class="nav-mobile" id="navMobile">
   <div class="nav-mobile-inner">
-      <a href="./index.html">ホーム</a>
-      <a href="./yurai.html">由来</a>
-      <a href="./gosaijin.html">御祭神</a>
-      <a href="./gokitou.html">ご祈祷</a>
-      <a href="./onayami.html">お悩み相談</a>
-      <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
-      <a href="./contact.html">お問い合わせ</a>
+    <a href="./index.html">ホーム</a>
+    <a href="./yurai.html">由来</a>
+    <a href="./gosaijin.html">御祭神</a>
+    <a href="./gokitou.html">ご祈祷</a>
+    <a href="./onayami.html">お悩み相談</a>
+    <a href="https://shop.koyururi-jinja.com/" target="_blank" rel="noopener">授与品</a>
+    <a href="./contact.html">お問い合わせ</a>
   </div>
 </nav>
+
+
+<!-- ── PAGE HERO（内部ページ用低いバナー）──── -->
+<!-- 既存の <section class="fv">〜</section> をこれに差し替え -->
 <div class="page-hero">
   <video autoplay muted loop playsinline>
     <source src="./images/hero.mp4" type="video/mp4">
   </video>
 </div>
-<nav class="pills" aria-label="ページ内メニュー">
+<!-- pills ナビ（必要な場合追加） -->
+<nav style="display:flex; background:#9b1a1a; border-bottom:1px solid #6b1313;">
   <a class="pill" href="yurai.html">由来</a>
   <a class="pill" href="gosaijin.html">御祭神</a>
   <a class="pill" href="gokitou.html">ご祈祷</a>
   <a class="pill" href="onayami.html">お悩み相談</a>
 </nav>
-<main class="prose">
-  <section class="section section--ref">
-    <h1 class="ref-title">送信ありがとうございました</h1>
-    <div class="ref-divider" aria-hidden="true"><span></span></div>
-    <div style="text-align:center;padding:40px 24px 100px;">
-      <p class="ref-text" style="text-align:center;">送信内容のコピーを入力されたメールアドレス宛に送信しました。</p>
-      <p class="ref-text" style="text-align:center;">担当者が確認後、ご返信いたします。しばらくお待ちください。</p>
-      <a href="./index.html" style="display:inline-block;margin-top:40px;padding:13px 40px;background:#9b1a1a;color:#fff;font-family:'Shippori Mincho',serif;font-size:0.9rem;letter-spacing:0.12em;text-decoration:none;">トップへ戻る</a>
-    </div>
-  </section>
-</main>
+
+
+<!-- ── FOOTER ────────────────────────────── -->
 <footer>
   <div class="footer-inner">
+
     <div class="footer-info">
       <div>
         <div class="footer-logo">
@@ -75,24 +88,32 @@
             <span class="footer-logo-romaji">Koyururi Shrine</span>
           </div>
         </div>
+
         <div class="footer-address">
           〒238-0243 神奈川県三浦市三崎1丁目10-10<br>
           E-mail：<a href="mailto:contact@koyururi-jinja.com">contact@koyururi-jinja.com</a>
         </div>
+
         <div class="footer-links">
           <a href="./tos.html">利用規約</a>
           <a href="./privacy.html">プライバシーポリシー</a>
           <a href="./required-information.html">特定商取引法に基づく表示</a>
         </div>
       </div>
+
       <p class="footer-copyright">&copy; 2026 こゆるり神社 All Rights Reserved.</p>
     </div>
+
     <div class="footer-map">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.0!2d139.619!3d35.154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019276ced5c2b81%3A0x7b9fee3c53a9bb49!2z44GT44f3441v44KoIOelnuexsQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="こゆるり神社 アクセスマップ"></iframe>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.0!2d139.619!3d35.154!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6019276ced5c2b81%3A0x7b9fee3c53a9bb49!2z44GT44f3441v44KoIOelnuexsQ!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+        allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="こゆるり神社 アクセスマップ">
+      </iframe>
     </div>
+
   </div>
 </footer>
+
 <script src="./script.js" defer></script>
-</body>
-</html>
