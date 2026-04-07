@@ -87,7 +87,7 @@ if (!function_exists('h')) {
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <video autoplay muted playsinline poster="./images/hero-poster.jpg">
+  <video id="heroVideo" autoplay muted playsinline poster="./images/hero-poster.jpg">
     <source src="./images/fv.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
@@ -273,5 +273,31 @@ if (!function_exists('h')) {
 </footer>
 
 <script src="./script.js" defer></script>
+
+<script>
+// ─────────────────────────────────────────────
+// ヒーロー動画：メイン再生 → ループ動画に切り替え
+//
+// ファイル名を変更する場合はここを編集してください：
+//   MAIN_VIDEO  … 最初に1回だけ再生する動画
+//   LOOP_VIDEO  … メイン終了後にループ再生する動画
+// ─────────────────────────────────────────────
+(function () {
+  var MAIN_VIDEO = './images/fv.mp4';      // メイン動画（1回再生）
+  var LOOP_VIDEO = './images/fv_loop.mp4'; // ループ動画（繰り返し再生）
+
+  var video = document.getElementById('heroVideo');
+  if (!video) return;
+
+  video.addEventListener('ended', function () {
+    // ループ動画に切り替えてループ再生開始
+    video.src = LOOP_VIDEO;
+    video.loop = true;
+    video.play().catch(function () {
+      // 自動再生がブロックされた場合は何もしない
+    });
+  });
+})();
+</script>
 </body>
 </html>
